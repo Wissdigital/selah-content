@@ -9,5 +9,9 @@ Built by `data-pipeline/build-db.js` in the main Selah repo. Bible text is publi
 (KJV, BSB, WEB, ASV). Word-occurrence data is STEPBible-Data (Tyndale House / STEPBible.org),
 CC BY 4.0 — see the app's About screen for full credits.
 
-`version.json` — bump `dbVersion` whenever `selah.db` changes; the app compares this to decide
-whether to re-download.
+`selah.db.gz` — gzip-compressed (~33% of raw size); the app downloads this and decompresses
+it on-device (see `content-sync.ts`). Regenerate with `gzip -9` on a fresh `selah.db` build.
+
+`version.json` — bump `dbVersion` whenever `selah.db.gz` changes; the app compares this to
+decide whether to re-download. `sizeBytes` is the **compressed** (.gz) size, used for the
+download progress bar.
